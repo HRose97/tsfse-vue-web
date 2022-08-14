@@ -4,9 +4,17 @@ import Vue from 'vue'
 Vue.use(VueRouter);
 /*设置部分*/
 const systemInfo = () => import("@/page/settings/system");
-/*布局*/
+
+
 //用户管理
 const userManager = () => import("@/page/user/userManager");
+//订单中心
+const ordersManager = () => import("@/page/orders/ordersManager");
+//赛事中心
+const eventsManager = () => import("@/page/events/eventsManager");
+//球队中心
+const teamsManager = () => import("@/page/teams/teamsManager");
+
 
 const baseView = () => import("@/layout/base-view");
 const rightView = () => import("@/layout/right-content");
@@ -42,6 +50,68 @@ export const routes = [
                     }
                 ]
             },
+            {
+                path: '/teams',
+                name: '球队中心',
+                hidden: false,
+                icon: 'el-icon-s-grid',
+                component: rightView,
+                children: [
+                    {
+                        path: 'teams',
+                        hidden: false,
+                        name: '篮球',
+                        icon: 'el-icon-basketball',
+                        component: teamsManager,
+                    },
+                    {
+                        path: 'teams',
+                        hidden: false,
+                        name: '足球',
+                        icon: 'el-icon-football',
+                        component: teamsManager,
+                    },
+                ]
+            },
+            {
+                path: '/events',
+                name: '赛事中心',
+                hidden: false,
+                icon: 'el-icon-video-camera-solid',
+                component: rightView,
+                children: [
+                    {
+                        path: 'events',
+                        hidden: false,
+                        name: '篮球赛事',
+                        icon: 'el-icon-basketball',
+                    },
+                    {
+                        path: 'events',
+                        hidden: false,
+                        name: '足球赛事',
+                        icon: 'el-icon-basketball',
+                        component: eventsManager,
+                    }
+                ]
+            },
+            {
+                path: '/orders',
+                name: '订单中心',
+                hidden: false,
+                icon: 'el-icon-s-claim',
+                component: rightView,
+                children: [
+                    {
+                        path: 'orders',
+                        hidden: false,
+                        name: '订单中心',
+                        icon: 'el-icon-trophy-1',
+                        component: ordersManager,
+                    }
+                ]
+            },
+
             {
                 path: '/settings',
                 name: '设置',

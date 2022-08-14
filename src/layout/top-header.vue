@@ -29,7 +29,7 @@
     export default {
         data() {
             return {
-                userName: '阳光沙滩',
+                userName: 'Hzh',
                 avatar: 'https://cdn.sunofbeaches.com/images/default_avatar.png'
             }
         },

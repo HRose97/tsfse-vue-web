@@ -15,3 +15,19 @@ export const checkToken = () => {
 export const listUsers = () => {
     return http.requestGet(baseUrl + "/admin/user/getAllUserByPage?current=1&size=10");
 };
+
+
+//获取用户列表
+export const getUserInfoByFilter = (phone,email,userName,userType,status,level) => {
+    return http.requestGet(baseUrl + "/admin/user/getUserInfoByFilter?current=1&size=10"
+    + "&phone=" + phone 
+    + "&email=" + email   
+    + "&userName=" + userName 
+    + "&userType=" + userType   
+    + "&level=" + level    
+    + "&status=" + status    
+    );
+};
+
+
+
