@@ -2,55 +2,62 @@
     <div id="order-manager">
         <div class="order-list">
             <el-table
-                :data="eventList"
+                :data="orderList"
                 border
                 style="width: 100%">
 
                 <el-table-column
-                    prop="physicalId"
-                    label="赛事编号"
+                    prop="teamId"
+                    label="球队编号"
                     width="100">
                 </el-table-column>
 
                 <el-table-column
-                    prop="heldCountry"
-                    label="举办国"
+                    prop="teamName"
+                    label="球队名称"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="heldLocation"
-                    label="举办地"
+                    prop="teamAdministrator"
+                    label="球队管理员"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="heldHome"
-                    label="举办主场"
+                    prop="teamType"
+                    label="球队类型"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="maximumCapacity"
-                    label="最大容纳观众"
+                    prop="teamCountry"
+                    label="球队所属国"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="awayGround"
-                    label="客场队"
+                    prop="teamDate"
+                    label="球队成立日期"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="matchTime"
-                    label="比赛时间"
+                    prop="teamLocal"
+                    label="球队所在地"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="heldVenues"
-                    label="举办场馆"
+                    prop="teamLocal"
+                    label="球队所在地"
+                    width="180">
+                </el-table-column>
+
+                
+                <el-table-column
+                    prop="teamLogo"
+                    label="球队LOGO"
                     width="180">
                 </el-table-column>
 
@@ -82,7 +89,7 @@
     </div>
 </template>
 <script>
-    import * as eventApi from '../../api/eventApi' 
+    import * as teamApi from '../../api/teamApi' 
 
 
     export default {
@@ -94,16 +101,16 @@
                     size:'', 
                     total:''
                 },
-                eventList:[]
+                orderList:[]
             }
         },
         methods: {
-            listEvents(){
-                eventApi.listEvents(this.pagination.currentPage).then(result => {
+            listTeams(){
+                teamApi.listTeams(this.pagination.currentPage).then(result => {
                 //listUsers().then(result => {
                     console.log("result == > "+result.data);
-                    if(result.code === eventApi.CODE_SUCCESS){
-                        this.eventList = result.data.records;
+                    if(result.code === teamApi.CODE_SUCCESS){
+                        this.orderList = result.data.records;
                     }
                 })
             }
@@ -111,7 +118,7 @@
         
         mounted(){
             //加载第一页数据
-            this.listEvents();
+            this.listTeams();
         }
     }
 

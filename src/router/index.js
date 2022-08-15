@@ -13,7 +13,7 @@ const ordersManager = () => import("@/page/orders/ordersManager");
 //赛事中心
 const eventsManager = () => import("@/page/events/eventsManager");
 //球队中心
-const teamsManager = () => import("@/page/teams/teamsManager");
+const teamManager = () => import("@/page/teams/teamManager");
 
 
 const baseView = () => import("@/layout/base-view");
@@ -62,14 +62,14 @@ export const routes = [
                         hidden: false,
                         name: '篮球',
                         icon: 'el-icon-basketball',
-                        component: teamsManager,
+                        component: teamManager,
                     },
                     {
                         path: 'teams',
                         hidden: false,
                         name: '足球',
                         icon: 'el-icon-football',
-                        component: teamsManager,
+                        component: teamManager,
                     },
                 ]
             },
@@ -80,12 +80,6 @@ export const routes = [
                 icon: 'el-icon-video-camera-solid',
                 component: rightView,
                 children: [
-                    {
-                        path: 'events',
-                        hidden: false,
-                        name: '篮球赛事',
-                        icon: 'el-icon-basketball',
-                    },
                     {
                         path: 'events',
                         hidden: false,

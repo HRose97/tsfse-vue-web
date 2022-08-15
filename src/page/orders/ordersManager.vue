@@ -7,32 +7,26 @@
                 style="width: 100%">
 
                 <el-table-column
-                    prop="order_id"
+                    prop="orderId"
                     label="订单ID"
-                    width="180">
+                    width="280">
                 </el-table-column>
 
                 <el-table-column
-                    prop="member_username"
+                    prop="memberUsername"
                     label="用户名"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="total_amount"
+                    prop="totalAmount"
                     label="订单总额"
                     width="180">
                 </el-table-column>
 
                 <el-table-column
-                    prop="pay_amount"
+                    prop="payAmount"
                     label="应付总额"
-                    width="180">
-                </el-table-column>
-
-                <el-table-column
-                    prop="total_amount-pay_amount"
-                    label="总优惠"
                     width="180">
                 </el-table-column>
 
@@ -63,9 +57,9 @@
                     label="是否需要发票"
                     width="180">
                         <template slot-scope="scope">
-                            <span class="order-name" v-if="scope.row.bill_type=='0'">不开发票</span>
-                            <span class="order-name" v-if="scope.row.bill_type=='1'">纸质发票</span>
-                            <span class="order-name" v-if="scope.row.bill_type=='2'">电子发票</span>                            
+                            <span class="order-name" v-if="scope.row.billType=='0'">不开发票</span>
+                            <span class="order-name" v-if="scope.row.billType=='1'">纸质发票</span>
+                            <span class="order-name" v-if="scope.row.billType=='2'">电子发票</span>                            
                         </template>
                 </el-table-column>
 
@@ -87,19 +81,25 @@
     </div>
 </template>
 <script>
-    import * as orderApi from '../../api/orderApi'
+    import * as orderApi from '../../api/orderApi' 
 
 
     export default {
         data(){
             return{
+                pagination:{
+                    current: '',
+                    totalPage: '',
+                    size:'', 
+                    total:''
+                },
                 orderList:[]
             }
         },
         methods: {
             listOrder(){
-                console.log("result == >  1111");
-                orderApi.listOrders().then(result => {
+                orderApi.listOrders(this.pagination.currentPage).then(result => {
+                //listUsers().then(result => {
                     console.log("result == > "+result.data);
                     if(result.code === orderApi.CODE_SUCCESS){
                         this.orderList = result.data.records;
@@ -107,6 +107,7 @@
                 })
             }
         },
+        
         mounted(){
             //加载第一页数据
             this.listOrder();
