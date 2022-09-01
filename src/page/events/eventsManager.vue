@@ -32,7 +32,7 @@
 
                 <el-table-column
                     prop="maximumCapacity"
-                    label="最大容纳观众"
+                    label="最大容纳观众/人"
                     width="180">
                 </el-table-column>
 

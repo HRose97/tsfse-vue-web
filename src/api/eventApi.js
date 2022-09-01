@@ -10,6 +10,16 @@ export const listEvents = () => {
 };
 
 
+//中国城市获取
+export const chinaCityGetAll = () => {
+    return http.requestGet(baseUrl + "/common/chinacity/getAllChinacity?current=1&size=10");
+};
+
+//全球城市获取
+export const getAllGlobalLocation = () => {
+    return http.requestGet(baseUrl + "/common/globalLocation/getAllGlobalLocation?current=1&size=10");
+};
+
 
 
 

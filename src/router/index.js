@@ -8,12 +8,20 @@ const systemInfo = () => import("@/page/settings/system");
 
 //用户管理
 const userManager = () => import("@/page/user/userManager");
+const addAndUpdateUser = () => import("@/page/user/addAndUpdateUser");
+
+
 //订单中心
 const ordersManager = () => import("@/page/orders/ordersManager");
 //赛事中心
 const eventsManager = () => import("@/page/events/eventsManager");
 //球队中心
-const teamManager = () => import("@/page/teams/teamManager");
+const footballManager = () => import("@/page/teams/footballManager");
+const basketballManager = () => import("@/page/teams/basketballManager");
+//公共部分
+const chinaCityManager = () => import("@/page/common/chinaCityManager");
+const globalCityManager = () => import("@/page/common/globalCityManager");
+
 
 
 const baseView = () => import("@/layout/base-view");
@@ -47,6 +55,13 @@ export const routes = [
                         name: '用户管理',
                         icon: 'el-icon-user',
                         component: userManager,
+                    },
+                    {
+                        path: 'addAndUpdateUser',
+                        hidden: true,
+                        name: '用户新增',
+                        icon: 'el-icon-user',
+                        component: addAndUpdateUser,
                     }
                 ]
             },
@@ -58,18 +73,18 @@ export const routes = [
                 component: rightView,
                 children: [
                     {
-                        path: 'teams',
+                        path: 'basketballManager',
                         hidden: false,
                         name: '篮球',
                         icon: 'el-icon-basketball',
-                        component: teamManager,
+                        component: basketballManager,
                     },
                     {
-                        path: 'teams',
+                        path: 'footballManager',
                         hidden: false,
                         name: '足球',
                         icon: 'el-icon-football',
-                        component: teamManager,
+                        component: footballManager,
                     },
                 ]
             },
@@ -105,7 +120,29 @@ export const routes = [
                     }
                 ]
             },
-
+            {
+                path: '/common',
+                name: '数据字典',
+                hidden: false,
+                icon: 'el-icon-s-order',
+                component: rightView,
+                children: [
+                    {
+                        path: 'common',
+                        hidden: false,
+                        name: '中国城市',
+                        icon: 'el-icon-star-off',
+                        component: chinaCityManager,
+                    },
+                    {
+                        path: 'common',
+                        hidden: false,
+                        name: '全球城市',
+                        icon: 'el-icon-help',
+                        component: globalCityManager,
+                    },                    
+                ]
+            },
             {
                 path: '/settings',
                 name: '设置',

@@ -1,7 +1,7 @@
 <template>
     <div id="order-manager">
         <div class="order-list">
-            <el-table
+            <el-table 
                 :data="orderList"
                 border
                 style="width: 100%">
@@ -9,7 +9,7 @@
                 <el-table-column
                     prop="orderId"
                     label="订单ID"
-                    width="280">
+                    width="240">
                 </el-table-column>
 
                 <el-table-column
@@ -19,6 +19,12 @@
                 </el-table-column>
 
                 <el-table-column
+                    prop="orderType"
+                    label="订单类型"
+                    width="80">
+                </el-table-column>
+
+                <el-table-column class="hdemo-part"
                     prop="totalAmount"
                     label="订单总额"
                     width="180">
@@ -28,6 +34,12 @@
                     prop="payAmount"
                     label="应付总额"
                     width="180">
+                </el-table-column>
+
+                <el-table-column
+                    prop="discountAmount"
+                    label="优惠总额"
+                    width="100">
                 </el-table-column>
 
                 <el-table-column
@@ -67,17 +79,13 @@
                     label="编辑">
                     <template>
                         <el-button type="primary" size="medium">
-                            重置密码
-                        </el-button>
-                        <el-button type="danger" size="medium">
-                            禁用
+                            查看
                         </el-button>
                     </template>
                 </el-table-column>
 
             </el-table>
         </div>
-    
     </div>
 </template>
 <script>
@@ -101,13 +109,16 @@
                 orderApi.listOrders(this.pagination.currentPage).then(result => {
                 //listUsers().then(result => {
                     console.log("result == > "+result.data);
-                    if(result.code === orderApi.CODE_SUCCESS){
-                        this.orderList = result.data.records;
+                    if(result.code === orderApi.CODE_SUCCESS){ 
+                        let arr = result.data.records || [];
+                        arr.map(item=>{
+                            item.discountAmount = item.totalAmount - item.payAmount
+                        })
+                        this.orderList = arr;
                     }
                 })
             }
         },
-        
         mounted(){
             //加载第一页数据
             this.listOrder();
@@ -117,8 +128,9 @@
 </script>
 <style>
     #order-manager{
-        padding: 20px
+        padding: 20px;    
     }
+
    
     /*    //头像相关设置
     .order-avater {

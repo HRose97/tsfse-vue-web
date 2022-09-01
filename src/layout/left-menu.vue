@@ -4,6 +4,7 @@
         <el-menu
                 :default-active="$route.path"
                 :uniqueOpened="true"
+                :collapse="isCollapse"
                 class="el-menu-vertical">
             <!--遍历菜单内容-->
             <!--有两种：第一种没子菜单，另外一种是有子菜单的-->
@@ -38,6 +39,7 @@
     export default {
         data() {
             return {
+                isCollapse: false,
                 menuList: []
             }
         },
