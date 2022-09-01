@@ -38,6 +38,7 @@ export const adduserByAdmin = (userVo) =>{
     return http.requestPost(baseUrl + "/admin/user/addUserInfo" + userVo);
 };
 
+
 //导出数据
 export const ouPuttEcexl = () => {
     return http.requestGet(baseUrl + "/admin/user/ouPuttEcexl");

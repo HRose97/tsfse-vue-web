@@ -61,6 +61,8 @@
                             action="http://localhost:9001/hzh-user/admin/user/import">
                         </el-upload> -->
 
+                        
+
                     <el-upload
                             :show-file-list="false"
                             :before-upload="beforeUpload"
@@ -68,15 +70,16 @@
                             :on-error="onError"
                             :disabled="importDisabled"
                             style="display: inline-flex;margin-right:13px; margin-left:13px;"
-                            action="http://localhost:9001/hzh-user/admin/user/import">
-                        <el-button class="import-batton" size="medium" :disabled="importDisabled" type="success" :icon="importDataIcon">
+                            action="http://localhost:9001/hzh-user/admin/user/import" >
+                        <el-button class="import-batton" size="medium" :disabled="importDisabled"  type="success" :icon="importDataIcon">
                             {{importDataText}}
                         </el-button>
                     </el-upload>
 
                     <el-button type="primary" size="medium" @click="toEmport"  icon="el-icon-upload2" >
                             导出    
-                    </el-button>
+                    </el-button>    
+
                 </el-form-item>
             </el-form>
         </div>
@@ -308,8 +311,9 @@
                 this.importDataText = '导入数据';
                 this.importDataIcon = 'el-icon-upload2';
                 this.importDisabled = false;
-                this.initEmps();
-                this.$message.success("导入失败！");
+                //调用刷新数据的方法
+                this.listUser();
+                this.$message.error("导入失败！");
             },
             //导入文件成功后回调
             onSuccess(){
@@ -320,13 +324,15 @@
                 // 将上传组件改为允许使用
                 this.importDisabled = false;
                 // 调用刷新数据的方法
-                this.initEmps();
-                // message 弹出消息
-                this.$message.success("导入成功！");
-                //导入成功后刷新
                 this.listUser();
+                // message 弹出消息
+                if(window.msg === '导入成功'){
+                    this.$message.success("导入成功");
+                }else{
+                    this.$message.error("数据已存在");
+                }
+            
             },
-            //上传文件调用
             beforeUpload() {
                 //将文本修改为正在导入
                 this.importDataText = '正在导入';
@@ -338,13 +344,14 @@
             //导出文件
             toEmport(){
                 api.ouPuttEcexl().then(result => {
+                    console.log("1111111")
                     if(result.code === api.CODE_SUCCESS){
                         this.$message.success(result.msg)
                     }else{
                         this.$message.error(result.msg)
                     }
                 })
-            }
+            },
         },
         mounted(){
             //加载第一页数据
