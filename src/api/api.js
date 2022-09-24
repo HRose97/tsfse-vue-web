@@ -11,14 +11,19 @@ export const checkToken = () => {
     return http.requestGet(baseUrl + '/uc/account/token');
 };
 
-//获取用户列表
+//获取非系统用户列表
 export const listUsers = () => {
     return http.requestGet(baseUrl + "/admin/user/getAllUserByPage?current=1&size=10");
 };
 
+
+//获取系统用户列表
+export const adminUserList = () => {
+    return http.requestGet(baseUrl + "/admin/user/adminUserList?current=1&size=10");
+};
 //禁用用户
 export const disableUser = (id,status) => {
-    return http.requestPut(baseUrl + "/admin/user/delUserById?id=" + id + "&ststus=" + status);
+    return http.requestGet(baseUrl + "/admin/user/disableUserById?id=" + id + "&status=" + status);
 };
 
 //获取用户列表
@@ -38,11 +43,13 @@ export const adduserByAdmin = (userVo) =>{
     return http.requestPost(baseUrl + "/admin/user/addUserInfo" + userVo);
 };
 
-
 //导出数据
 export const ouPuttEcexl = () => {
     return http.requestGet(baseUrl + "/admin/user/ouPuttEcexl");
 };
 
 
-
+//删除用户
+export const delUserById = (id) => {
+return http.requestGet(baseUrl + "/admin/user/delUserById?id="+ id);
+}

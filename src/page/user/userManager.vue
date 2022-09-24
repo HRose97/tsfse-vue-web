@@ -16,30 +16,31 @@
 
                 <el-form-item >
                     <el-select v-model="seach.status" placeholder="禁用/正常">
-                    <el-option label="禁用" value="1"></el-option>
-                    <el-option label="正常" value="0"></el-option>
+                        <el-option label="禁用" value="1"></el-option>
+                        <el-option label="正常" value="0"></el-option>
                     </el-select>
                 </el-form-item>
 
                 <el-form-item >
                     <el-select v-model="seach.level" placeholder="会员等级">
-                    <el-option label="大众会员" value="0"></el-option>
-                    <el-option label="黄金会员" value="1"></el-option>
-                    <el-option label="铂金会员" value="2"></el-option>
-                    <el-option label="钻石会员" value="3"></el-option>
+                        <el-option label="大众会员" value="0"></el-option>
+                        <el-option label="黄金会员" value="1"></el-option>
+                        <el-option label="铂金会员" value="2"></el-option>
+                        <el-option label="钻石会员" value="3"></el-option>
+                        <el-option label="至尊会员" value="4"></el-option>
                     </el-select>
                 </el-form-item>
 
                 <el-form-item >
                     <el-select v-model="seach.userType" placeholder="用户类型">
-                    <el-option label="平台管理员" value="check"></el-option>
-                    <el-option label="系统管理员" value="sys"></el-option>
-                    <el-option label="赛事管理员" value="events"></el-option>
-                    <el-option label="场馆管理员" value="sportstypeman"></el-option>           
-                    <el-option label="球队管理员" value="teams"></el-option>
-                    <el-option label="游客/访客" value="visitor"></el-option>
-                    <el-option label="会员" value="member"></el-option>
-                    <el-option label="贵宾" value="vip"></el-option>
+                        <el-option label="平台管理员" value="check"></el-option>
+                        <el-option label="系统管理员" value="sys"></el-option>
+                        <el-option label="赛事管理员" value="events"></el-option>
+                        <el-option label="场馆管理员" value="sportstypeman"></el-option>           
+                        <el-option label="球队管理员" value="teams"></el-option>
+                        <el-option label="游客/访客" value="visitor"></el-option>
+                        <el-option label="会员" value="member"></el-option>
+                        <el-option label="贵宾" value="vip"></el-option>
                     </el-select>
                 </el-form-item>
 
@@ -49,20 +50,6 @@
                     <el-button type="primary" size="medium" @click="toAddUserByAdmin"  icon="el-icon-circle-plus" >
                             新增    
                     </el-button>
-
-                    <!-- <el-button  :disabled="importDisabled" class="btn-upload" type="success" @click="toImport" icon="el-icon-folder-opened"> {{importDataText}}</el-button>
-                        <el-upload
-                            :show-file-list="false"
-                            :before-upload="beforeUpload"
-                            :on-success="onSuccess"
-                            :on-error="onError"
-                            :disabled="importDisabled"
-                            style="display: inline-flex;margin-right: 10px;"
-                            action="http://localhost:9001/hzh-user/admin/user/import">
-                        </el-upload> -->
-
-                        
-
                     <el-upload
                             :show-file-list="false"
                             :before-upload="beforeUpload"
@@ -88,6 +75,12 @@
                 :data="userList"
                 border
                 style="width: 100%">
+
+                <!-- 全选按钮 -->
+                <!-- <el-table-column
+                    type="selection"
+                    width="45">
+                </el-table-column> -->
 
                 <el-table-column
                     prop="id"
@@ -130,41 +123,27 @@
                 </el-table-column>
 
                 <el-table-column
-                    label="用户类型"
-                    width="100">
-                        <template slot-scope="scope">
-                            <span class="user-name" v-if="scope.row.userType=='check'">平台管理员</span>
-                            <span class="user-name" v-if="scope.row.userType=='sys'">系统管理员</span>
-                            <span class="user-name" v-if="scope.row.userType=='events'">赛事管理员</span>           
-                            <span class="user-name" v-if="scope.row.userType=='sportstypeman'">场馆管理员</span>   
-                            <span class="user-name" v-if="scope.row.userType=='teams'">球队管理员</span>
-                            <span class="user-name" v-if="scope.row.userType=='visitor'">游客/访客</span>           
-                            <span class="user-name" v-if="scope.row.userType=='member'">会员</span>         
-                            <span class="user-name" v-if="scope.row.userType=='vip'">vip</span>         
-                        </template>
-                </el-table-column>
-
-                <el-table-column
                     label="会员等级"
-                    width="100">
+                    width="120">
                         <template slot-scope="scope">
                             <span class="user-name" v-if="scope.row.level=='0'">大众会员</span>
                             <span class="user-name" v-if="scope.row.level=='1'">黄金会员</span>
                             <span class="user-name" v-if="scope.row.level=='2'">铂金会员</span>           
-                            <span class="user-name" v-if="scope.row.level=='3'">钻石会员</span>            
+                            <span class="user-name" v-if="scope.row.level=='3'">钻石会员</span> 
+                            <span class="user-name" v-if="scope.row.level=='4'">至尊会员</span>            
                         </template>
                 </el-table-column>
 
                 <el-table-column
                     prop="createTime"
                     label="创建时间"
-                    width="160">
+                    width="150">
                 </el-table-column>
 
                 <el-table-column
                     prop="updateTime"
                     label="更新时间"
-                    width="160">
+                    width="150">
                 </el-table-column>
 
                 <el-table-column
@@ -188,39 +167,37 @@
 
                 <el-table-column
                     label="编辑">
-                    <template>
+                    <template slot-scope="scope">
                         <el-button type="primary" size="medium" icon="el-icon-key">
                             重置密码
                         </el-button>
-                        <el-button type="danger" size="medium" @click="disableUser" icon="el-icon-warning">
+                        <el-button type="danger" size="medium"  @click.native.prevent="disableUser(scope.row.id,scope.row.status)" icon="el-icon-warning">
                             禁用    
                         </el-button>
-                        <el-button type="danger" size="medium" @click="updateUser" icon="el-icon-edit">
+                        <el-button type="danger" size="medium" @click.native.prevent="updateUser(scope.row)" icon="el-icon-edit">
                             修改    
                         </el-button>
-                        <el-button type="danger" size="medium" @click="deleteUser" icon="el-icon-delete">
+
+                        <el-button type="danger" size="medium" @click.native.prevent="deleteUser(scope.row.id)" icon="el-icon-delete">
                             删除    
                         </el-button>
+
                     </template>
                 </el-table-column>
 
             </el-table>
         </div>
-        <div class="pager-pagination">
-            <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="pagination.total"
-                :current-page="pagination.current"
-                :page-count="pagination.totalPage">
-            </el-pagination>
-        </div>
+
+        <!-- 分页组件 -->
+        <Pagination v-bind:child-msg="pageparm" @callFather="callFather"></Pagination>
+
     </div>
 </template>
 <script>
     import {listUsers,CODE_SUCCESS} from '../../api/api'
     import {getUserInfoByFilter} from '../../api/api'
     import * as api from '../../api/api' 
+    import Pagination from '../../utils/Pagination'
     export default {
         data(){
             return{
@@ -232,11 +209,11 @@
                     status:'',
                     level:''
                 },
-                pagination:{
-                    current: '',
-                    totalPage: '',
-                    size:'', 
-                    total:''
+                // 分页参数
+                pageparm: {
+                    currentPage: 1,
+                    pageSize: 10,
+                    total: 10
                 },
                 userList:[],
                 importDataText: '导入数据',
@@ -244,7 +221,17 @@
                 importDisabled: false
             }
         },
+        // 注册组件
+        components: {
+            Pagination
+        },
         methods: {
+            // 分页插件事件
+            callFather(parm) {
+            this.formInline.page = parm.currentPage
+            this.formInline.limit = parm.pageSize
+            this.getdata(this.formInline)
+            },
             doSeache(){
                 getUserInfoByFilter(
                         this.seach.phone,
@@ -259,6 +246,19 @@
                     }
                 })
             },
+            //删除用户
+            //deleteUser 0未删除  1删除
+            deleteUser(id) {
+                //console.log(id)
+                api.delUserById(id).then(result => {
+                    if(api.CODE_SUCCESS === result.code ){
+                        this.$message.success(result.msg)
+                        this.listUsers();
+                    }else{
+                        this.$message.success(result.msg)
+                    }
+                })
+            },
             doReSet(){
                     this.seach.phone = '',
                     this.seach.email = '',
@@ -266,10 +266,10 @@
                     this.seach.userType = '',
                     this.seach.status = '',
                     this.seach.level = '',
-                    this.listUser()
+                    this.listUsers()
             },
-            disableUser(){
-                api.disableUser().then(result => {
+            disableUser(id,status){
+                api.disableUser(id,status).then(result => {
                     if(result.code === api.CODE_SUCCESS){
                         //禁用成功
                          this.$message.success(result.msg);
@@ -280,7 +280,7 @@
                     }
                 })
             },
-            listUser(){
+            listUsers(){
                 listUsers(this.pagination.currentPage).then(result => {
                 //listUsers().then(result => {
                     console.log("result == > "+result.data);
@@ -312,7 +312,7 @@
                 this.importDataIcon = 'el-icon-upload2';
                 this.importDisabled = false;
                 //调用刷新数据的方法
-                this.listUser();
+                this.listUsers();
                 this.$message.error("导入失败！");
             },
             //导入文件成功后回调
@@ -324,7 +324,7 @@
                 // 将上传组件改为允许使用
                 this.importDisabled = false;
                 // 调用刷新数据的方法
-                this.listUser();
+                this.listUsers();
                 // message 弹出消息
                 if(window.msg === '导入成功'){
                     this.$message.success("导入成功");
@@ -355,21 +355,17 @@
         },
         mounted(){
             //加载第一页数据
-            this.listUser();
+            this.listUsers();
         }
     }
 
 </script>
 <style>
     #user-manager{
-        padding: 20px
+        padding: 20px;
     }
     .el-input {
         width: 200px;
-    }
-
-    .import-batton{
-
     }
 
     .el-button--medium {

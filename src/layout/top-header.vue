@@ -2,7 +2,7 @@
     <div class="header-part clearfix">
         <!--显示内容-->
         <div class="header-left-box float-left">
-            <div class="header-logo">管理中心标题</div>
+            <div class="header-logo">HZH-球队售票管理系统V1.0</div>
         </div>
         <div class="header-right-box float-right">
             <div class="header-user-info clearfix">
@@ -72,5 +72,6 @@
         color: #fff;
         font-size: 20px;
         font-weight: 600;
+        margin-left: 880px;
     }
 </style>

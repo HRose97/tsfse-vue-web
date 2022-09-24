@@ -9,6 +9,7 @@ const systemInfo = () => import("@/page/settings/system");
 //用户管理
 const userManager = () => import("@/page/user/userManager");
 const addAndUpdateUser = () => import("@/page/user/addAndUpdateUser");
+const amdinUserManager = () => import("@/page/user/amdinUserManager");
 
 
 //订单中心
@@ -50,16 +51,23 @@ export const routes = [
                 component: rightView,
                 children: [
                     {
+                        path: 'adminUsers',
+                        hidden: false,
+                        name: '系统用户',
+                        icon: 'el-icon-s-custom',
+                        component: amdinUserManager,
+                    },
+                    {
                         path: 'users',
                         hidden: false,
-                        name: '用户管理',
+                        name: '会员用户',
                         icon: 'el-icon-user',
                         component: userManager,
                     },
                     {
                         path: 'addAndUpdateUser',
                         hidden: true,
-                        name: '用户新增',
+                        name: '用户新增/修改',
                         icon: 'el-icon-user',
                         component: addAndUpdateUser,
                     }
@@ -147,14 +155,14 @@ export const routes = [
                 path: '/settings',
                 name: '设置',
                 hidden: false,
-                icon: 'el-icon-setting',
+                icon: 'el-icon-s-tools',
                 component: rightView,
                 children: [
                     {
                         path: 'users',
                         hidden: false,
                         name: '系统信息',
-                        icon: 'el-icon-cpu',
+                        icon: 'el-icon-setting',
                         component: systemInfo,
                     }
                 ]
